@@ -39,7 +39,6 @@ var cities = ["new york", "los angeles", "chicago", "houston", "phoenix", "phila
     "arlington", "minneapolis", "cleveland", "bakersfeild", "aurora", "honolulu", "corpus christi", "ljubljana"];
 
 var lettersText = document.getElementById("letters-text");
-var livesText = document.getElementById("lives-text");
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 // var plAgn = document.getElementById("playAgain");
@@ -138,7 +137,7 @@ function start() {
                 }
             }
         }
-        // livesText.textContent = "Guesses left: " + guessesLeft;
+        
         lettersText.textContent = "Letters Guessed: " + lettersGuessed.join(" ");
         correctText.textContent = correctGuess.join(" ");
         winsText.textContent = "Wins: " + wins;
