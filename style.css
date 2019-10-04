@@ -1,0 +1,11 @@
+.container {
+    width: 800px;
+    height: 600px;
+    border: 5px solid gray;
+    position: absolute;
+}
+
+h1, p, div, button {
+    text-align: center;
+}
+
