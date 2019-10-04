@@ -58,7 +58,7 @@ function start() {
     lettersGuessed = [];
     correctGuess = [];
     strt.style.display = "none";
-    var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "];
+    var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     form.disabled = true;
 
     // happens on start of game
@@ -82,92 +82,75 @@ function start() {
     if (form.value == "misc") {
         computerChoice = misc[Math.floor(Math.random() * misc.length)];
     }
-    // document.getElementById("pickOne")
+    
 
     //for loop for blank spaces of computerChoice
     for (var i = 0; i < computerChoice.length; i++) {
-        correctGuess[i] = "_";
+        if (computerChoice[i] == " ") {
+            correctGuess[i] = " ";
+        } else {
+            correctGuess[i] = "_";
+        }
     }
-    var remaining = computerChoice.length;
+
+    // replace("RegEx").length replaces "" with none
+    var remaining = computerChoice.replace(/\s/g, "").length;
     //gameplay
     document.onkeyup = function (event) {
         var userGuess = event.key;
-        
-    
         //indicates whether event.key pressed is within the computers random choice (true or false)**
         var includes = computerChoice.includes(userGuess);
-        console.log(computerChoice);
-
         //defines which index userGuess is in alphabet
-
-        // try something similar in order to grab and splice computerGuess*********
         var i = alphabet.indexOf(userGuess);
         //takes userGuess out of alphabet array (always perform)
         alphabet.splice(i, 1);
-
-            // IF WIN statement. Add to wins and play a song*********(DOESNT WORK)
-            if (remaining == 0) {
-                wins++;
-                strt.style.display = "block";
-                start();
-            }
-            //only perform this if the letter has not been taken out of alphabet array
-            else if ((i !== -1) && (remaining > 0)) {
-                lettersGuessed.push(" " + userGuess);
-
-                //if includes is true, push guess to correctGuess array
-                if (includes) {
-                    // for loop to position letters in correct order
-                    for (var i = 0; i < computerChoice.length; i++) {
-                        if (computerChoice[i] === userGuess) {
-                            correctGuess[i] = userGuess;
-                            remaining--;   
-                        }
-                    }
-                    //if includes is false, minus guessesleft   
-                } else {
-                    if (guessesLeft >= 1) {
-                        guessesLeft--;
-                        wantedLevel.push("$");
-                    }
-                    //if LOSE STATEMENT. add to losses and play a song*********
-                    //if no guesses are left, end game and start new one
-                    //
-                    if (guessesLeft == 0) {
-                        strt.style.display = "block";
-                        losses++;
-                        start();
+        // IF WIN statement. Add to wins and play a song*********(DOESNT WORK)
+        if (remaining == 0) {
+            wins++;
+            strt.style.display = "block";
+            start();
+        }
+        //only perform this if the letter has not been taken out of alphabet array
+        else if ((i !== -1) && (remaining > 0)) {
+            lettersGuessed.push(" " + userGuess);
+            //if includes is true, push guess to correctGuess array
+            if (includes) {
+                // for loop to position letters in correct order
+                for (var i = 0; i < computerChoice.length; i++) {
+                    if (computerChoice[i] === userGuess) {
+                        correctGuess[i] = userGuess;
+                        remaining--;
                     }
                 }
+                //if includes is false, minus guessesleft   
+            } else {
+                if (guessesLeft >= 1) {
+                    guessesLeft--;
+                    wantedLevel.push("$");
+                }
+                //if LOSE STATEMENT. add to losses and play a song*********
+                //if no guesses are left, end game and start new one
+                //
+                if (guessesLeft == 0) {
+                    strt.style.display = "block";
+                    losses++;
+                    start();
+                }
             }
-
-
+        }
         // livesText.textContent = "Guesses left: " + guessesLeft;
         lettersText.textContent = "Letters Guessed: " + lettersGuessed.join(" ");
         correctText.textContent = correctGuess.join(" ");
         winsText.textContent = "Wins: " + wins;
         lossesText.textContent = "Losses: " + losses;
         wantedText.textContent = "WANTED LEVEL: " + wantedLevel.join(" ");
-
     }
-        lettersText.textContent = "Letters Guessed: ";
-        winsText.textContent = "Wins: ";
-        lossesText.textContent = "Losses: ";
-        wantedText.textContent = "WANTED LEVEL: ";
-        correctText.textContent = correctGuess.join(" ");
+    lettersText.textContent = "Letters Guessed: ";
+    winsText.textContent = "Wins: ";
+    lossesText.textContent = "Losses: ";
+    wantedText.textContent = "WANTED LEVEL: ";
+    correctText.textContent = correctGuess.join(" ");
 }
-
-
-
-
-
-// function playAgain() {
-//     guessesLeft = 7;
-//     lettersGuessed = [];
-//     strt.style.display = "none";
-//     plAgn.style.display = "none";
-// }
-
 
 
 

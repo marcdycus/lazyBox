@@ -16,6 +16,30 @@ h1, p, div, button {
     text-align: center;
 }
 
+p {
+    white-space: pre;
+}
+
+#options {
+    border-block-end-style: none;
+    height: 25px;
+    background-color: rgb(211, 163, 91);
+    font-family: 'Special Elite', cursive;
+    outline: none;
+}
+
+#misc {
+    color: rgb(100, 6, 6);
+}
+
+button {
+    font-family: 'Special Elite', cursive;
+    height: 30px;
+    border-radius: 3px;
+    background-color: rgb(211, 163, 91);
+    outline: none;
+}
+
 h1 {
     font-size: 100px;
 }
